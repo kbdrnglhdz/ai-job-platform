@@ -50,3 +50,8 @@ The Jacoco report will be generated at `target/site/jacoco/index.html`.
 - **Curriculum Upload**: Supports PDF and DOCX files up to 5MB. Verified using Apache Tika.
 - **Social Profile Linking**: Supports LinkedIn and GitHub profiles with URL validation.
 - **Global Error Handling**: Standardized `ApiResponse` envelope for all endpoints.
+
+## Workflows
+We use custom agentic workflows to ensure quality and consistency:
+- `/diagnose-work`: Performs a self-diagnostic of the session to extract insights and improve the agent's logic. Check `.agents/insights.md` for results.
+- `/develop-backend`: Standard TDD flow for feature development.

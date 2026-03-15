@@ -17,39 +17,29 @@
   2. `git pull origin [develop|main]`
   3. `git checkout -b feature/[TICKET-ID]-backend`
 
-### **Step 1: Domain & Model**
-- **Action**: Implement/Update Domain Entities and Value Objects.
-- **Rules**: Inmutable VOs, identity-based Entities, business logic inside.
-- **Path**: `src/main/java/com/example/project/domain/model/`
+### **Step 1: Scaffolding & Domain Model**
+- **Action**: Use `/scaffold-domain` to generate the structure.
+- **Path**: `src/main/java/com/pcia/[context]/domain/model/`
+- **Details**: Define Aggregate Root, Entities, and Value Objects.
 
-### **Step 2: Database Migration & Persistence**
-- **Action**: Create Flyway migration and JPA entities.
-- **Path**: `src/main/resources/db/migration/V<N>__desc.sql`
-- **Action**: Implement MapStruct if needed for mapping Domain <-> Persistence.
+### **Step 2: Database Migration & Persistence Implementation**
+- **Action**: Create Flyway migration and JPA adapters.
+- **Check**: Ensure `domain` has zero dependencies on `infrastructure`.
 
-### **Step 3: Application Layer & Use Cases**
-- **Action**: Implement Application Service (`@Transactional`).
-- **Action**: Implement DTOs and Mappers.
-- **Path**: `src/main/java/com/example/project/application/service/`
-
-### **Step 4: Presentation Layer (API)**
-- **Action**: Implement Controller and Global Advice.
-- **Standard**: JSON envelope and versioned/plural URLs.
-
-### **Step 5: Documentation Update (Step N+1)**
-- **Action**: Update technical documentation.
-- **Files**: `docs/`, `implementation/plans/`, `README.md`, `pom.xml` (for new dependencies).
+... (Steps 3-4 remain similar) ...
 
 ## 4. **Checklist & Verification**
 
 ### **Testing Strategy**
 - [ ] Unit Tests: `should_[expectedBehavior]_when_[condition]`.
 - [ ] Integration Tests: Using Testcontainers for MySQL (src/test/java/.../IT.java).
+- [ ] **Architecture Test**: Run `HexagonalArchitectureTest` to ensure no layer violations.
 - [ ] `./mvnw clean verify` execution.
 
 ### **Quality Assurance**
-- [ ] No N+1 queries detected.
-- [ ] Coverage >= 85%.
+- [ ] No N+1 queries detected (Audit `@EntityGraph` or `JOIN FETCH`).
+- [ ] Coverage >= 85% (Enforced by JaCoCo).
+- [ ] ArchUnit compliance verified.
 - [ ] Standard error handling implemented.
 
 ## 5. **Technical Notes**

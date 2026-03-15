@@ -13,6 +13,8 @@ This skill provides advanced capabilities to design, plan, and audit Java backen
 - **Entity vs VO**: Identify when to use an Entity (identity-based) vs a Value Object (attribute-based).
 - **Aggregate Roots**: Design clusters of objects that maintain consistency through a single root.
 - **Hexagonal Layers**: Ensure `domain` has zero dependencies on `infrastructure`.
+- **Architecture Safeguard**: Use **ArchUnit** to programmatically enforce hexagonal layer boundaries and framework insulation.
+- **Scaffolding Automation**: Use `/scaffold-domain` to ensure consistency in package structure across bounded contexts.
 - **SOLID Auditor**: Detect violations like "Fat Classes" (SRP) or "Concrete Dependencies" (DIP).
 
 ### 2. Implementation Planning & API Design
