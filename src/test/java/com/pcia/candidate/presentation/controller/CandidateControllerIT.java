@@ -89,4 +89,37 @@ class CandidateControllerIT {
                 .andExpect(jsonPath("$.success").value(false))
                 .andExpect(jsonPath("$.message").value("Invalid social link URL format"));
     }
+
+    @Test
+    void shouldReturnBadRequestWhenSocialLinkTypeMissing() throws Exception {
+        CandidateId id = CandidateId.generate();
+        SocialLinkRequest request = new SocialLinkRequest();
+        request.setUrl("https://linkedin.com/in/johndoe");
+        request.setType(null); // Triggers MethodArgumentNotValidException
+
+        mockMvc.perform(post("/api/v1/candidates/{id}/social-links", id.getValue().toString())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.success").value(false))
+                .andExpect(jsonPath("$.message").value(org.hamcrest.Matchers.containsString("Validation failed")));
+    }
+
+    @Test
+    void shouldReturnInternalServerErrorOnUnexpectedException() throws Exception {
+        CandidateId id = CandidateId.generate();
+        SocialLinkRequest request = new SocialLinkRequest();
+        request.setUrl("https://linkedin.com/in/johndoe");
+        request.setType(SocialLinkType.LINKEDIN);
+
+        doThrow(new RuntimeException("Unexpected error"))
+                .when(linkSocialProfileUseCase).linkSocialProfile(any());
+
+        mockMvc.perform(post("/api/v1/candidates/{id}/social-links", id.getValue().toString())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.success").value(false))
+                .andExpect(jsonPath("$.message").value("An unexpected error occurred. Please try again later."));
+    }
 }

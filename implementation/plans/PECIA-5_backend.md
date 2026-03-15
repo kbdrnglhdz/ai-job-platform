@@ -69,12 +69,12 @@ Implement the technical foundation for candidate onboarding by allowing CV (PDF/
 - [x] Unit Tests: `CandidateTest` (business invariants), `UploadCurriculumServiceTest`.
 - [x] Integration Tests: `CandidatePersistenceIT` using Testcontainers (MySQL).
 - [x] API Tests: `CandidateControllerIT` with `MockMvc`.
-- [ ] Command: `./mvnw clean verify`.
+- [x] Command: `./mvnw clean verify`.
 
 ### **Quality Assurance**
-- [ ] Immuntable Value Objects for `Curriculum` and `SocialLink`.
-- [ ] Domain is framework-agnostic.
-- [ ] Coverage >= 85%.
+- [x] Immutable Value Objects for `Curriculum` and `SocialLink`.
+- [x] Domain is framework-agnostic.
+- [x] Coverage >= 85% (85% enforced by Jacoco).
 
 ## 5. **Technical Notes**
 - **Security**: File size limit (5MB) enforced at the Controller and Service level. MIME type verification using `Tika`.
