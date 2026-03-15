@@ -66,7 +66,7 @@ Implement the technical foundation for candidate onboarding by allowing CV (PDF/
 ## 4. **Checklist & Verification**
 
 ### **Testing Strategy**
-- [ ] Unit Tests: `CandidateTest` (business invariants), `UploadCurriculumServiceTest`.
+- [x] Unit Tests: `CandidateTest` (business invariants), `UploadCurriculumServiceTest`.
 - [ ] Integration Tests: `CandidatePersistenceIT` using Testcontainers (MySQL).
 - [ ] API Tests: `CandidateControllerIT` with `MockMvc`.
 - [ ] Command: `./mvnw clean verify`.
